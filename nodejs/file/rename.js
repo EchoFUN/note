@@ -1,3 +1,9 @@
+/**
+ * 输入 readline
+ * 初始化参数
+ * 输入流 和 输出流
+ */
+
 var readline = require('readline'),
     fs  = require('fs');
 

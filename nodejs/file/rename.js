@@ -2,6 +2,11 @@
  * 输入 readline
  * 初始化参数
  * 输入流 和 输出流
+ * fs.rename();
+ * fs.renameSync()
+ * nodejs文件操作提供了两种选择，一种是异步的形式，
+ * 另外一种是Sync的形式
+ * 异步各种回调，但是貌似好点 = =！擦！
  */
 
 var readline = require('readline'),

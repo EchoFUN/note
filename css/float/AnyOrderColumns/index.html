@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		/* 正常排列 */
+		.one {
+			float: left;
+			width: 34%;
+			background: #444;
+		}
+		.two {
+			float: left;
+			width: 33%;
+			background: #999;
+		}
+		.three {
+			float: left;
+			width: 33%;
+			background: #555;
+		}
+		/* 第二个往前推 */
+		.rowone-one {
+			margin-left: 33%;
+		}
+
+		.rowone-two {
+			margin-left: -67%;
+		}
+
+		div {
+			height: 200px;
+		}
+
+		/* 逆序 */
+		.rowtwo-one {
+			margin-left:66%;
+		}
+		.rowtwo-two {
+			margin-left: -67%;
+		}
+		.rowtwo-three {
+			margin-left: -100%;
+		}
+
+		/* 213 */
+		.rowthree-one {
+			margin-left:66%;
+		}
+		.rowthree-two {
+			margin-left: -100%;
+		}
+		.rowthree-three {
+			margin-left: -67%;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="one">One</div>
+	<div class="two">Two</div>
+	<div class="three">Three</div>
+	<div class="rowone-one one">One</div>
+	<div class="rowone-two two">Two</div>
+	<div class="rowone-three three">Three</div>
+	<div class="rowtwo-one one">One</div>
+	<div class="rowtwo-two two">Two</div>
+	<div class="rowtwo-three three">Three</div>
+	<div class="rowthree-one one">One</div>
+	<div class="rowthree-two two">Two</div>
+	<div class="rowthree-three three">Three</div>
+</body>
+</html>

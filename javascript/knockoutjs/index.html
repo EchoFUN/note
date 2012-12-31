@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>今天到谁</title>
+</head>
+<body>
+
+  <nav id="tab-list" data-bind="foreach: tabList">
+      <a href="javascript:;" data-bind="text: $data,
+                                        click: $root.switchTab,
+                                        css: { active : $root.currentTab() == $data }">
+      </a>
+  </nav>
+
+  <div id="name-list" data-bind="style: { display : currentTab() == '名单管理' ? 'block' : 'none'}">
+    <h3>名单</h3>
+    <input type="text" data-bind="value: currName"/>
+    <button data-bind="click: addPerson">添加人到名单</button>
+    <ul data-bind="foreach: people">
+      <li>
+        <span data-bind="text: name"></span>
+        <a href="javascript:;" data-bind="click: $root.removePerson">x</a>
+      </li>
+    </ul>
+  </div>
+
+  <div id="pay-queue" data-bind="style: { display : currentTab() == '今天到谁' ? 'block' : 'none'}">
+    <h3>今天到谁</h3>
+    <button data-bind="click: paid">支付完</button>
+    <button data-bind="click: jumpToNext">今天不在</button>
+    <ul data-bind="foreach: payQueue">
+      <li>
+        <span data-bind="text: name,
+                         click: $root.upToFirst"></span>
+      </li>
+    </ul>
+  </div>
+
+  <script src="knockout.js"></script>
+  <script src="payapp.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+// 常用的工具，换行，清除浮动
+
+.clearfix {
+  &:after {
+    display: block;
+    content: ".";
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+
+  *display: block;
+  *zoom: 1;
+}

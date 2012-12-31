@@ -1,0 +1,125 @@
+@import "utils";
+
+// 所有流行 grid 的实现
+// author: Kidd<kiddkai@gmail.com>;
+// 
+#grid {
+  // 传统的 960 grid，支持 12 column 和 16 column的。
+  // params: @columnNumber  {Number} 代表是12列或者是16列的;
+  .make-960-gs (@columnNumber) {
+
+    @containterWidth: 960px;
+    @marginSize: 10px;
+    @singleGridWidth: @containterWidth / @columnNumber - @marginSize * 2;
+
+
+    .gridX (@index) when (@index > 0) {
+      (~".grid@{index}") { 
+        .grid(@index);
+        float: left;
+      }
+      .gridX (@index - 1);
+    }
+
+    .gridX (0) {}
+
+    .offsetX (@index) when (@index > 0) {
+      (~".offset@{index}") { 
+        .offset(@index); 
+      }
+      .offsetX (@index - 1);
+    }
+
+    .offsetX (0) {}
+
+    .offset (@columns) {
+      margin-left: @columns * (@singleGridWidth + @marginSize * 2) + @marginSize;
+    }
+
+    .grid (@columns) {
+      width: (@columns * @singleGridWidth) + @marginSize * 2 * (@columns - 1);
+      margin: 0px @marginSize;
+    }
+
+    .row {
+      .clearfix;
+    }
+
+    .grid-container {
+      width: @containterWidth;
+      margin: 0 auto;
+      .clearfix;
+    }
+
+    // 调用上面的递归函数生成grid和offset
+    .gridX (@columnNumber);
+    .offsetX (@columnNumber);
+  }
+
+  // 可定制性强一点的，和bootstrap的模型类似
+  // 和 960gs 不同的是，它只有左边距，没有右边距
+  // param: @singleGridWidth {Pixel} 单个Grid的宽度;
+  // param: @gridGutterWidth {Pixel} 每个grid的左边距;
+  // param: @columnNum {Number} 代表有多少列;
+  .make-grid (@singleGridWidth, @gridGutterWidth, @columnNum) {
+
+    // 计算出容器的值
+    @containerWidth: (@singleGridWidth + @gridGutterWidth) * @columnNum - @gridGutterWidth;
+
+    .gridX (@index) when (@index > 0) {
+      (~".grid@{index}") { 
+        .grid(@index);
+        float: left;
+      }
+      .gridX (@index - 1);
+    }
+
+    .gridX (0) {}
+
+    .grid (@column) {
+      width: @singleGridWidth * @column + @gridGutterWidth * (@column - 1);
+      margin-left: @gridGutterWidth;
+    }
+
+    .offsetX (@index) when (@index > 0) {
+      (~".offset@{index}") { .offset(@index); }
+      .offsetX(@index - 1);
+    }
+
+    .offsetX (0) {}
+
+    .offset (@column) {
+      margin-left: @column * (@gridGutterWidth + @singleGridWidth) + @gridGutterWidth;
+    }
+
+    .grid-container {
+      width: @containerWidth;
+      margin: 0 auto;
+    }
+
+    .row {
+      margin-left: @gridGutterWidth * (-1);
+      .clearfix;
+    }
+
+    .gridX (@columnNum);
+    .offsetX (@columnNum);
+  }
+
+  // 网格流布局，和网格布局类似，不同的是它按照百分比来决定grid的大小
+  .make-grid-fluid () {
+    
+  }
+
+}
+
+// 960 gs 用法
+// @gridColumns: 12;
+// #grid > .make-960-gs(@gridColumns);
+
+
+// 任意grid
+// 
+// 
+#grid > .make-grid(60px, 20px, 12);
+

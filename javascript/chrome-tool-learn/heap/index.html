@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>内存泄露测试</title>
+
+</head>
+<body>
+  <p>
+    <a href="javascript:;" id="leak-btn">leak</a> 
+    <a href="javascript:;" id="destory-btn">distory</a>
+  </p>
+
+  <script>
+    var leak;
+    function LeakTest() {
+      
+    }
+
+    LeakTest.prototype = {
+      init: function() {
+        this._interval = null;
+        this.start();
+      },
+
+      start: function() {
+        var self = this;
+        this._interval = setInterval(function() {
+          self.onInterval();
+        }, 1000);
+      },
+
+      onInterval: function() {
+        console.log(this._interval);
+      },
+
+      end: function() {
+        clearInterval(this._interval);
+      }
+    }
+
+    function AddLeak() {
+      leak = new LeakTest();
+      leak.init();
+    }
+
+    function DestoryLeak() {
+      // leak.end();
+      leak = null;
+    }
+
+
+    
+
+    document.getElementById('leak-btn').addEventListener('click', function() {
+      (function neverEndLoop() {
+        setTimeout(function() {
+          AddLeak();
+          DestoryLeak();
+          neverEndLoop();
+        }, 1000);
+      })();
+    }, false);
+    document.getElementById('destory-btn').addEventListener('click', DestoryLeak, false);
+  </script>
+</body>
+</html>

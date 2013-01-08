@@ -112,7 +112,7 @@ var http = require('http')
         paramPairs.body = body;
         paramPairs.create_at = new Date;
         var options = {
-            url: "http://localhost"
+            url: "localhost"
           , path: "/article"
           , port: 3000
           , method: paramPairs.id ? "put" : "post"
@@ -134,9 +134,10 @@ var http = require('http')
 
         });
 
-        request.on("error", function() {
-          util.error("创建请求的时候出错");
+        request.on("error", function(err) {
+          util.error("创建请求的时候出错 =>" + err);
         });
+        debugger;
         request.setHeader('Content-Type', 'application/json');
         request.write(JSON.stringify(paramPairs));
 

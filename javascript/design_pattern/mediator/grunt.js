@@ -11,8 +11,20 @@ module.exports = function(grunt) {
       options: {
         browser: true
       }
+    },
+
+    // 合并文件
+    concat: {
+      dist: {
+        src: [
+          '../components/jquery/jquery.js',
+          'mediator.js',
+          'chat.js'
+          ],
+        dest:"build/app.js"
+      }
     }
   });
 
-  grunt.registerTask('default', 'lint');
+  grunt.registerTask('default', 'lint concat');
 };

@@ -14,5 +14,5 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('defualt', 'lint');
-}
+  grunt.registerTask('default', 'lint');
+};

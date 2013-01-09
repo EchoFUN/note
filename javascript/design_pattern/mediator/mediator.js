@@ -1,18 +1,15 @@
 // Mediator Pattern
 // ================================================
-// 
 // Mediator 暴露出几个接口让系统中不同的部分可以相互交流
-// 
 // ### 应用场景 ###
-// 
+
 // 如果两个组件之间有特别多的直接联系的时候，也许就是时候使用 Mediator 来作为两个组件的中转点来替代他们俩的直接交流。
 // 这样可以明确地把两个组建解耦。而且分工明确。他们通过 Mediator 进行相互进行操作。这可以提高每个组建的重用性。
-// 
+
 // 真实世界里的 Mediator 的例子就是机场控制中心。每一个控制塔处理多辆飞机的降落着陆因为所有的交流都是通过控制塔来完成
 // 而非飞机和飞机之间的直接交流。这就是这套中央控制系统的成功秘诀，而这个成功秘诀就用在程序设计中。
-// 
+
 // ### 实现原理 ###
-// 
 // 基本都是通过共享一个主题（subject）来通知监听者的。也就可以假设两个组建之间都是对方的订阅者同时也是对方的发布者。这个
 // 没有什么固定的关系，反正subject上可以注册多个监听的component来监听感兴趣的消息。
 
@@ -58,7 +55,6 @@
   }
 
   Topic.prototype = {
-
     // 给当前主题添加一个 subscriber
     AddSubscriber: function(fn , options, context) {
       var callback = new Subscriber(fn,  options, context);
@@ -92,7 +88,7 @@
 
     // 增加一个主题，或者子主题
     AddTopic: function(topic) {
-      this._topics[topic] = new Topic(this.namespace ? this.namespace + ":" : "") + topic);
+      this._topics[topic] = new Topic((this.namespace ? this.namespace + ":" : "" )+ topic);
     },
 
     // 是否拥有某主题
@@ -140,10 +136,10 @@
         }
       }
 
-      for (var x in this._topics) {
+      for (var key in this._topics) {
         if (!this.stopped) {
-          if (this._topics.hasOwnProperty(x)) {
-            this._topics[x].Publish(data);
+          if (this._topics.hasOwnProperty(key)) {
+            this._topics[key].Publish(data);
           }
         }
       }
@@ -185,9 +181,9 @@
     },
 
     Subscribe: function(topicName, fn, options, context) {
-      var options = options || {},
-          context = context || {},
-          topic = this.GetTopic(topicName),
+      options = options || {};
+      context = context || {};
+      var topic = this.GetTopic(topicName),
           sub = topic.AddSubscriber(fn, options, context);
 
       return sub;
@@ -200,7 +196,11 @@
     Remove: function(topicName, identifier) {
       this.GetTopic(topicName).RemoveSubscriber(identifier);
     },
-
+    
+    /**
+     * 根据主题名发布消息
+     * @param {String} topicName 主题名
+     */
     Publish: function(topicName) {
       var args = Array.prototype.slice.call(arguments, 1),
           topic = this.GetTopic(topicName);
@@ -208,25 +208,10 @@
       args.push(topic);
       this.GetTopic(topicName).Publish(args);
     }
-  }
+  };
 
   root.Mediator = Mediator;
   Mediator.Topic = Topic;
   Mediator.Subscriber = Subscriber;
+
 })(window);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

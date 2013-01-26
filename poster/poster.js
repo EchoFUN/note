@@ -137,7 +137,7 @@ var http = require('http')
         request.on("error", function(err) {
           util.error("创建请求的时候出错 =>" + err);
         });
-        debugger;
+        
         request.setHeader('Content-Type', 'application/json');
         request.write(JSON.stringify(paramPairs));
 

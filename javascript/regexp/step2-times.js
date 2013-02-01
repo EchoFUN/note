@@ -137,6 +137,29 @@ describe('量词测试组', function() {
     expect('I said: "this is content"'.match(QUOTE_REGEXP)[0]).toBe('"this is content"');
     expect('I said: "this is "content"'.match(QUOTE_REGEXP)[0]).toBe('"this is "');
   });
+
+
+  /**
+   * 测试 script 标签脚本提取
+   */
+  it('应该提取完整的标签脚本', function() {
+    var scripts = [
+                    '<script>'
+                  ,   'alert("yes");'
+                  , '</script>'
+                  , '<script>'
+                  ,   'alert("yes");'
+                  , '</script>'
+                  ].join('\n');
+
+    // 贪婪
+    var SCRIPT_REGEXP = /<script>[\S\s]*<\/script>/;
+    expect(scripts.match(SCRIPT_REGEXP)[0]).toBe(scripts);
+
+    // 非贪婪 
+    SCRIPT_REGEXP = /<script>[\S\s]*?<\/script>/;
+    expect(scripts.match(SCRIPT_REGEXP)[0]).toBe('<script>\nalert("yes");\n</script>');
+  });
 });
 
 

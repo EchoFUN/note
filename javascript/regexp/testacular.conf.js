@@ -11,7 +11,8 @@ files = [
   JASMINE,
   JASMINE_ADAPTER,
   'step1-group.js',
-  'step2-times.js'
+  'step2-times.js',
+  'step3-grouping.js'
 ];
 
 

@@ -3,8 +3,7 @@ Canvas 学习
 
 1. 获得 canvas 2d上下文
 
-```js 
-
+```js
 var elem = document.getElementById('someID')
    ,  context =  elem.getContext('2d');
 ```

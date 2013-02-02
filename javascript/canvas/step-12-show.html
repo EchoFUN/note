@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Draw Rect</title>
+</head>
+<body>
+<canvas id="myCanvas" width="500" height="500">
+
+</canvas>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js">
+</script>
+
+
+<script type="text/javascript">
+
+    $(function() {
+        var elem = $('#myCanvas')
+        // 获取2d上下文
+          , context = elem.get(0).getContext("2d");
+
+        context.save();
+        context.shadowBlur = 20;
+        context.shadowColor = "rgb(0, 0, 0)";
+        context.fillRect(50, 50, 100, 100);
+
+        context.restore();
+        context.shadowColor = "rgb(255, 0, 0)";
+        context.shadowBlur = 50;
+        context.shadowOffsetX = 0;
+        context.shadowOffsetY = 0;
+        context.beginPath();
+        context.arc(400, 100, 50, 0, Math.PI*2, false);
+        context.closePath();
+        context.fill();
+
+
+
+
+    });
+
+</script>
+</body>
+</html>

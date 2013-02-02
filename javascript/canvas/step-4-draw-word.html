@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Draw Rect</title>
+</head>
+<body>
+<canvas id="myCanvas" width="500" height="500">
+
+</canvas>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js">
+</script>
+
+
+<script type="text/javascript">
+
+    $(function() {
+        var elem = $('#myCanvas')
+        // 获取2d上下文
+          , context = elem.get(0).getContext("2d")
+          , text = "hello world";
+
+        context.fillText(text, 40, 40);
+
+        context.font = "italic 30px serif";
+        context.fillText(text, 40, 80);
+
+        context.strokeText(text, 40, 120);
+
+    });
+
+</script>
+</body>
+</html>

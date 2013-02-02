@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Draw Rect</title>
+</head>
+<body>
+<canvas id="myCanvas" width="500" height="500">
+
+</canvas>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js">
+</script>
+
+
+<script type="text/javascript">
+
+    $(function() {
+        var elem = $('#myCanvas')
+        // 获取2d上下文
+                , context = elem.get(0).getContext("2d");
+
+
+        // 变换矩阵
+        // | a  c  e |      | x轴缩放   x轴倾斜    x轴平移 |
+        // | b  d  f | ==== | y轴倾斜   y轴缩放    y轴平移 |
+        // | 0  0  0 |      |   0         0         1    |
+        //
+        // 忽略最后一行
+        //
+        // 变换矩阵的默认值
+        //
+        // | 1  0  0 |
+        // | 0  1  0 |
+        // | 0  0  1 |
+        //
+        // context.transform(a. b, c, d, e, f, g)
+        //
+        // 缩放两倍
+        context.save();
+        context.transform(2, 0, 0, 2, 0, 0);
+        context.fillRect(50, 50, 100, 100);
+
+        context.restore();
+//        context.transform()
+    });
+
+</script>
+</body>
+</html>

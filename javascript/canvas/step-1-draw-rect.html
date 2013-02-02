@@ -20,7 +20,13 @@
                 // 获取2d上下文
               , context = elem.get(0).getContext("2d");
 
+
+            context.fillStyle = "rgb(0, 255, 0)";
             context.fillRect(40, 40, 100, 100);
+
+            context.strokeStyle = "rgb(255, 0, 0)";
+            context.lineWidth = 20;
+            context.strokeRect(150 , 40 , 100, 100);
         });
 
     </script>

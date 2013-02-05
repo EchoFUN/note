@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Draw Rect</title>
+</head>
+<body>
+<canvas id="myCanvas" width="500" height="500">
+
+</canvas>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js">
+</script>
+
+
+<script type="text/javascript">
+
+    $(function() {
+        var elem = $('#myCanvas')
+        // 获取2d上下文
+          , context = elem.get(0).getContext("2d");
+
+        // 线性渐变
+        var gradient = context.createLinearGradient(0, 0, 0, elem.height());
+        gradient.addColorStop(0, "rgb(0, 0, 0)");
+        gradient.addColorStop(1, "rgb(255, 255, 255)");
+
+        context.fillStyle = gradient;
+        context.fillRect(0, 0, elem.width(), elem.height());
+
+
+
+    });
+
+</script>
+</body>
+</html>

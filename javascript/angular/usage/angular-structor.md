@@ -1,7 +1,7 @@
-title: Angularjs App 应用架构
+lstitle: Angularjs App 应用架构
 tags: Angularjs, JavaScript
 categories: JavaScript, Angularjs
-
+id:5134d7985802ec0000000001
 +++++++++++++++++++++++++++++++++++++++
 
 ### app.js ###

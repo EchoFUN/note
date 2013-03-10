@@ -1,7 +1,7 @@
 title:ThoughtWorks 面试记
 tags: ThoughtWorks, Interview
 categories: ThoughtWorks
-
+id:513c9452067eb6a00f000001
 ++++++++++++++++++++++++++++++++++++
 
 上周五参加了ThoughtWorks的面试，ThoughtWorks是我梦寐以求的公司。做梦都想进去，排去待遇不说，那里能学到的东西不是一般的多。当然我面试的职位是 UI Developter。

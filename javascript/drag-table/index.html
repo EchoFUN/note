@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Drag 2 Select</title>
+  <style>
+    td {
+      border: 1px solid;
+    }
+
+    .selected {
+      background: #0ff;
+    }
+  </style>
+</head>
+<body>
+  <table class="test-table">
+    <thead>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+  <script>
+    jQuery.fn.extend({
+      getPositionAtTable: function() {
+        var x
+          , row 
+          , y
+
+        if (this[0].tagName && this[0].tagName.toLowerCase() == 'td') {
+          x = this.prevAll().length 
+          row = this.parent('tr')
+          y = row.prevAll().length
+        }
+
+        return {
+          x: x || 0,
+          y: y || 0
+        }
+      }
+    })
+
+    $(function() {
+      initTableAction()
+    })
+
+    function initTableAction() {
+      var tdCache = $('.test-table tbody td')
+        , table = $('.test-table')
+        , isMouseDown = false
+        , startTarget
+        , currentTarget
+      
+        $(document).on('mouseup', function() {
+          isMouseDown = false;
+        })
+
+      tdCache
+        .bind('mousedown', function(event) {
+          console.log('start target is [' + $(this).getPositionAtTable().x + ',' + $(this).getPositionAtTable().y + ']')
+          startTarget = this
+          currentTarget = this
+          isMouseDown = true
+          $(table).trigger('range:change', [$(startTarget).getPositionAtTable(), $(currentTarget).getPositionAtTable()])
+          return false
+        })
+        .bind('mouseover',function() {
+          if (isMouseDown) {
+            console.log('current target is [' + $(this).getPositionAtTable().x + ',' + $(this).getPositionAtTable().y + ']')
+            currentTarget = this
+            $(table).trigger('range:change', [$(startTarget).getPositionAtTable(), $(currentTarget).getPositionAtTable()])
+          }
+        })
+
+
+      table.on('range:change', function(event, start, end) {
+        console.log('into range')
+        table.find('td').each(function() {
+          if (isTdInRange(this, start, end)) {
+            $(this).addClass('selected')
+          }
+          else {
+            $(this).removeClass('selected')
+          }
+        })
+      })
+    }
+
+
+    function isTdInRange(td, start, end) {
+      var pos = $(td).getPositionAtTable()
+        , minx = start.x < end.x ? start.x : end.x
+        , miny = start.y < end.y ? start.y : end.y
+        , maxx = start.x > end.x ? start.x : end.x
+        , maxy = start.y > end.y ? start.y : end.y
+      console.log(minx, miny, maxx, maxy, pos.x, pos.y)
+      return pos.x <= maxx && pos.y <= maxy && pos.x >= minx && pos.y >= miny
+    }
+
+
+
+  </script>
+</body>
+</html>

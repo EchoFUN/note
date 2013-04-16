@@ -7,7 +7,7 @@
 
 // init require
 var fs = require('fs'),
-	readline = require('readline');
+		readline = require('readline');
 
 !function() {
 	if (process.argv.length < 3) return;
